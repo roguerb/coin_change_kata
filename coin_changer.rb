@@ -1,5 +1,10 @@
 class CoinChanger
+  DENOMINATIONS = [10, 5, 1]
+
   def change_for(amount)
-    Hash.new(0).merge({ 5 => amount / 5, 1 => amount % 5 }).delete_if { |_, value| value.zero? }
+    DENOMINATIONS.each_with_object(Hash.new(0)) do |denomination, result|
+      result[denomination] = amount / denomination
+      amount %= denomination
+    end.delete_if { |_, value| value.zero? }
   end
 end
