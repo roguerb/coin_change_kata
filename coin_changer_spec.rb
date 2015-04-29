@@ -21,19 +21,15 @@ RSpec.describe CoinChanger do
   end
 
   describe 'unit specs' do
-    it 'returns no coins for $0.00' do
-      change = coin_changer.change_for(0)
-      expect(change).to eq({})
-    end
-
-    it 'returns a penny for $0.01' do
-      change = coin_changer.change_for(1)
-      expect(change).to eq(1 => 1)
-    end
-
-    it 'returns two pennies for $0.02' do
-      change = coin_changer.change_for(2)
-      expect(change).to eq(1 => 2)
+    [ # amount  change
+      [ 0,      {}         ],
+      [ 1,      { 1 => 1 } ],
+      [ 2,      { 1 => 2 } ]
+    ].each do |amount, expected|
+      it "returns coins for #{amount} cents" do
+        change = coin_changer.change_for(amount)
+        expect(change).to eq expected
+      end
     end
   end
 end
