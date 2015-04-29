@@ -64,4 +64,18 @@ RSpec.describe CoinChanger do
       expect(change[any_denomination]).to eq 0
     end
   end
+
+  describe 'rounding' do
+    let(:denominations) { [10, 5] }
+
+    it 'rounds down to smallest denomination' do
+      change = coin_changer.change_for(2)
+      expect(change).to eq({})
+    end
+
+    it 'rounds up to smallest denomination' do
+      change = coin_changer.change_for(3)
+      expect(change).to eq(5 => 1)
+    end
+  end
 end
