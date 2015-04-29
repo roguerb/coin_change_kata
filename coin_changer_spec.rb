@@ -30,5 +30,10 @@ RSpec.describe CoinChanger do
       change = coin_changer.change_for(1)
       expect(change).to eq(1 => 1)
     end
+
+    it 'returns two pennies for $0.02' do
+      change = coin_changer.change_for(2)
+      expect(change).to eq(1 => 2)
+    end
   end
 end
