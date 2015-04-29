@@ -6,7 +6,6 @@ RSpec.describe CoinChanger do
 
   describe 'acceptance' do
     it 'returns a combination of coins' do
-      pending 'Not ready to pass acceptance test yet'
       change = coin_changer.change_for(394)
       coins = {
         100 => 3,
@@ -23,12 +22,15 @@ RSpec.describe CoinChanger do
   describe 'unit specs' do
     [
       # amount  change
-      [ 0,      {}                  ],
-      [ 1,      {  1 => 1 }         ],
-      [ 2,      {  1 => 2 }         ],
-      [ 5,      {  5 => 1 }         ],
-      [ 8,      {  5 => 1, 1 => 3 } ],
-      [ 10,     { 10 => 1 }         ]
+      [ 0,      {}                   ],
+      [ 1,      {   1 => 1 }         ],
+      [ 2,      {   1 => 2 }         ],
+      [ 5,      {   5 => 1 }         ],
+      [ 8,      {   5 => 1, 1 => 3 } ],
+      [ 10,     {  10 => 1 }         ],
+      [ 25,     {  25 => 1 }         ],
+      [ 50,     {  50 => 1 }         ],
+      [ 100,    { 100 => 1 }         ]
     ].each do |amount, expected|
       it "returns coins for #{amount} cents" do
         change = coin_changer.change_for(amount)
