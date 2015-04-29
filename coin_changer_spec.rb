@@ -2,20 +2,40 @@ require 'rspec'
 require_relative 'coin_changer'
 
 RSpec.describe CoinChanger do
-  subject(:coin_changer) { CoinChanger.new }
+  subject(:coin_changer) { CoinChanger.new(denominations) }
+  let(:denominations) { CoinChanger::USD }
 
   describe 'acceptance' do
-    it 'returns a combination of coins' do
-      change = coin_changer.change_for(394)
-      coins = {
-        100 => 3,
-        50 => 1,
-        25 => 1,
-        10 => 1,
-        5 => 1,
-        1 => 4
-      }
-      expect(change).to eq coins
+    context 'with American coins' do
+      it 'returns a combination of coins' do
+        change = coin_changer.change_for(394)
+        coins = {
+          100 => 3,
+          50 => 1,
+          25 => 1,
+          10 => 1,
+          5 => 1,
+          1 => 4
+        }
+        expect(change).to eq coins
+      end
+    end
+
+    context 'with European coins' do
+      let(:denominations) { [200, 100, 50, 20, 10, 5, 1] }
+
+      it 'works with European coins' do
+        change = coin_changer.change_for(399)
+        coins = {
+          200 => 1,
+          100 => 1,
+          50 => 1,
+          20 => 2,
+          5 => 1,
+          1 => 4
+        }
+        expect(change).to eq coins
+      end
     end
   end
 
