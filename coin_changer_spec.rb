@@ -30,8 +30,14 @@ RSpec.describe CoinChanger do
     ].each do |amount, expected|
       it "returns coins for #{amount} cents" do
         change = coin_changer.change_for(amount)
-        expect(change).to eq expected
+        expect(change).to include expected
       end
+    end
+
+    it 'returns 0 coins for unused denominations' do
+      change = coin_changer.change_for(0)
+      any_denomination = 1
+      expect(change[any_denomination]).to eq 0
     end
   end
 end
