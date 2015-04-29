@@ -21,10 +21,12 @@ RSpec.describe CoinChanger do
   end
 
   describe 'unit specs' do
-    [ # amount  change
+    [
+      # amount  change
       [ 0,      {}         ],
       [ 1,      { 1 => 1 } ],
-      [ 2,      { 1 => 2 } ]
+      [ 2,      { 1 => 2 } ],
+      [ 5,      { 5 => 1 } ]
     ].each do |amount, expected|
       it "returns coins for #{amount} cents" do
         change = coin_changer.change_for(amount)
