@@ -37,6 +37,16 @@ RSpec.describe CoinChanger do
         expect(change).to eq coins
       end
     end
+
+    context 'with Canadian coins' do
+      let(:denominations) { [200, 100, 50, 25, 10, 5] }
+
+      it 'works with Canadian coins' do
+        change = coin_changer.change_for(398)
+        coins = { 200 => 2 }
+        expect(change).to eq coins
+      end
+    end
   end
 
   describe 'unit specs' do
